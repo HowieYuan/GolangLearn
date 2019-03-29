@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-// num := 1 该方式不可在函数外部使用
+// 该方式不可在函数外部使用
+// num := 1
 
 func TestDeclaration(t *testing.T) {
 	// 变量声明的几种方式
@@ -16,15 +17,6 @@ func TestDeclaration(t *testing.T) {
 	d := 1
 
 	fmt.Print(a, b, c, d)
-}
-
-func TestOperator(t *testing.T) {
-	// ++a 前缀运算符不支持
-
-	// &^ 按位清零
-	a := 7
-	a = a &^ 1
-	fmt.Println(a)
 }
 
 // 声明自定义类型
