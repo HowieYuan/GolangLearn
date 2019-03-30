@@ -55,3 +55,33 @@ func TestIf(t *testing.T) {
 	}
 
 }
+
+func TestSwitch(t *testing.T) {
+	s := "aaa"
+
+	//不需要加 break
+	//不限制常量和整数，可以是各种类型
+	switch s {
+	//多个结果选项
+	case "aaa", "ccc":
+		fmt.Println("yes")
+	case "bbb":
+		fmt.Println("no")
+	default:
+		fmt.Println("nil")
+	}
+
+	num := 1
+
+	//switch 后面不跟表达式，则效果同 if...else...
+	switch {
+	case num > 1:
+		fmt.Println("> 1")
+	case num == 1:
+		fmt.Println("= 1")
+	case num < 1:
+		fmt.Println("< 1")
+	default:
+		fmt.Println("nil")
+	}
+}
