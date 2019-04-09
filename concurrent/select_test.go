@@ -34,6 +34,7 @@ func TestSelect(t *testing.T) {
 }
 
 func TestSelect2(t *testing.T) {
+	//多路选择
 	select {
 	case ret := <-DoAsyncService():
 		t.Log(ret)
