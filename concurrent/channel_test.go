@@ -87,3 +87,43 @@ func TestCloseChannel(t *testing.T) {
 	Receiver(channel, &wg)
 	wg.Wait()
 }
+
+//======================================================
+
+//通过 close 取消 channel，结束所有任务
+
+func Test(t *testing.T) {
+	channel := make(chan struct{}, 0)
+	for i := 0; i < 5; i++ {
+		go func(i int, ch chan struct{}) {
+			for {
+				if isCancelled(ch) {
+					break
+				}
+				time.Sleep(time.Millisecond * 5)
+			}
+			fmt.Println(i, "cancel")
+		}(i, channel)
+	}
+	cancel_2(channel)
+	time.Sleep(time.Second)
+}
+
+func isCancelled(ch chan struct{}) bool {
+	select {
+	case <-ch:
+		return true
+	default:
+		return false
+	}
+}
+
+//这种方法只能将消息告诉一个协程
+func cancel_1(cancelChan chan struct{}) {
+	cancelChan <- struct{}{}
+}
+
+//利用 close 可以广播所有协程
+func cancel_2(cancelChan chan struct{}) {
+	close(cancelChan)
+}
